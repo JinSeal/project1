@@ -1,0 +1,42 @@
+
+<%= render :partial => '/users/nav' %>
+
+<div class="user-content">
+    <%= render :partial => '/users/aside' %>
+    <main class="user-main">
+        <div class="transaction-history">
+            <h3>
+                <div class="wrap">
+                    <span>
+                        Transaction History
+                    </span>
+                    <%= link_to "Back", root_path %>
+                </div>
+            </h3>
+            <table>
+                <tr>
+                    <td>Settlment Date</td>
+
+                    <td>Symbol</td>
+                    <td>Trade</td>
+                    <td>Volumn</td>
+                    <td>Purchase Price</td>
+                    <td>Folio ID</td>
+
+                </tr>
+                <% @all_transactions.each do |transaction|%>
+                <tr>
+                    <td><%= transaction.settlment_date %></td>
+
+                    <td><%= transaction.symbol %></td>
+                    <td><%= transaction.trade_type %></td>
+                    <td><%= transaction.number %></td>
+                    <td><%= transaction.price %></td>
+                    <td><%= transaction.portfolio_id %></td>
+
+                </tr>
+                <% end %>
+            </table>
+        </div>
+    </main>
+</div>

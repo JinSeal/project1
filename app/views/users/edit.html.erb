@@ -1,0 +1,35 @@
+<%= render :partial => 'nav' %>
+
+<div class="user-content">
+    <%= render :partial => 'aside' %>
+    <main class="user-edit-form">
+        <div class="portfolio-summary">
+            <div class="form-style">
+            <%= simple_form_for @current_user do |f| %>
+            <fieldset>
+            <legend><span class="number">1</span> Personal Details</legend>
+
+            <%= f.input :email, disabled: true, as: :string%>
+            <%= f.input :account_no, disabled: true, as: :string%>
+            <%= f.input :username, placeholder:"Your user name *", as: :string, required: true %>
+            <%= f.input :full_name, placeholder:"Your full name *", as: :string, required: true%>
+            <%= f.input :dob, start_year: Date.today.year - 100, end_year: Date.today.year - 17%>
+            <%= f.input :address, placeholder:"Your address", as: :string%>
+            <%= f.input :mobile, placeholder:"Your mobile", maxlength:10, as: :tel%>
+            <%= f.input :image, placeholder:"http://... ", as: :url %>
+            <%= f.input :subscription, label: "Subscribe Newsletter" %>
+            <fieldset>
+            <legend><span class="number">2</span> Investment Information</legend>
+
+            <%= f.input :strategy, :collection => @strategy%>
+            <%= f.input :balance, disabled: true  %>
+
+            </fieldset>
+            <%= f.submit "Save Change" %>
+            <% end %>
+            <%= link_to "Back to InvestorHub", @current_user %>
+            </div>
+        </div>
+
+    </main>
+</div>

@@ -1,0 +1,102 @@
+
+<%= render :partial => '/users/nav' %>
+
+<div class="user-content">
+    <%= render :partial => '/users/aside' %>
+    <main class="user-main">
+        <div class="portfolio-summary">
+            <h3>
+                <div class="wrap">
+                    <span>
+                        Portfolio Summary
+                    </span>
+                    <%= link_to "New Portfolio", new_portfolio_path %>
+                </div>
+            </h3>
+            <p><%= @msg %></p>
+            <table>
+                <% if @current_user.portfolios.present? %>
+                <tr>
+                    <td>ID</td>
+                    <td>Portfolio Name</td>
+                    <td>Purchase Price</td>
+                    <td>Today's Change</td>
+                    <td>Total Profit/Loss</td>
+                    <td></td>
+                </tr>
+                <% @current_user.portfolios.sort.each  do |portfolio| %>
+                <tr>
+                    <td><%= portfolio.id %></td>
+                    <td><%= portfolio.name %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="/portfolios/<%= portfolio.id%>/edit">Edit</a></td>
+                    <% if check_empty_portfolio(portfolio.id) %>
+                    <td><a href="/portfolios/<%= portfolio.id%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
+                    <% else %>
+                    <% end %>
+                </tr>
+                <% end %>
+                <% end %>
+            </table>
+        </div>
+
+        <% if @current_user.portfolios.present? %>
+        <div class="portfolio-detail">
+            <h3>
+                <div class="wrap">
+                    <span>Portfolio details</span>
+                    <% if @current_user.transactions.present? %>
+                    <%= link_to "History", transactions_path, :method => 'get' %>
+                    <% end %>
+                </div>
+            </h3>
+            <% if @current_user.transactions.present? %>
+            <table>
+                <tr>
+                    <td title="Portfolio id">Folio</td>
+                    <td>Symbol</td>
+                    <td>Company Name</td>
+                    <td>No.</td>
+                    <td>Avg Purchase</td>
+                    <td>Latest Price</td>
+                    <td>Change %</td>
+                    <td>Today's Change</td>
+                </tr>
+                <% @current_user.portfolio_ids.each do |port_id| %>
+                <% if get_symbols(port_id).present? %>
+                <% get_symbols(port_id).each do |symbol| %>
+                <% info = StockQuote::Stock.quote symbol %>
+                <tr>
+                    <td><%= port_id %></td>
+                    <td><%= symbol %></td>
+                    <td><%= info.company_name %></td>
+                    <td><%= calc_share_num(port_id, symbol) %></td>
+                    <td><%= number_to_currency cal_avg_price(port_id, symbol) %></td>
+                    <td><%= number_to_currency info.latest_price %></td>
+                    <td><%= number_to_percentage info.change_percent*100 %></td>
+                    <td><%= number_to_currency (info.latest_price-info.previous_close)* calc_share_num(port_id, symbol)%></td>
+                </tr>
+                <% end %>
+                <% end %>
+                <% end %>
+            </table>
+            <% end %>
+
+
+        </div>
+        <% end %>
+
+        <div class="watchlist">
+            <h3>Watchlist</h3>
+        </div>
+        <% if params[:controller] == "portfolios" %>
+        <%= render :partial => 'users/portfolio_form' %>
+        <% end %>
+
+        <div class="message box">
+            <%= @msg %>
+        </div>
+    </main>
+</div>

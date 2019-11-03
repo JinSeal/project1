@@ -1,0 +1,17 @@
+
+<div class="login-container">
+
+    <div class="form">
+        <%= render :partial => '/users/logcontrol' %>
+        <% if flash[:error].present? %>
+        <p><%= flash[:error] %></p>
+        <% end %>
+
+        <%= form_tag login_path do %>
+        <%= label_tag :email %>
+        <%= email_field_tag :email%>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+        <%= submit_tag 'Sign In' %>
+        <% end %>
+    </div>

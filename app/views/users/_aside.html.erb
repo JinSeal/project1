@@ -1,0 +1,26 @@
+<aside class="">
+    <div class="user-profile">
+        <h3>Profile</h3>
+        <ul class="account-info">
+            <li>Username: <%= @current_user.username %></li>
+            <li>Account Name: <%= @current_user.full_name %></li>
+            <li>Account No:<%= @current_user.account_no %></li>
+            <li>Account Created:<br><%= @current_user.created_at %></li>
+            <li>Last Update:<br><%= @current_user.updated_at %></li>
+        </ul>
+
+        <ul class="account-info">
+            <li>Strategy: <%= @current_user.strategy %></li>
+            <li>Account Balance: <%= @current_user.balance %></li>
+            <li>Total Profit/Loss: coming soon</li>
+        </ul>
+
+        <% unless current_page?('users/:id/edit') %>
+        <div class="control">
+            <%= link_to "Trade", :method => 'get' %>
+            <%= link_to "Edit Profile", "users/#{@current_user.id}/edit", :method => 'get' %>
+            <%= link_to "Logout", login_path, :method => 'delete' %>
+        </div>
+        <% end %>
+    </div>
+</aside>

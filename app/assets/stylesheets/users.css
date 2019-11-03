@@ -1,0 +1,117 @@
+
+.navbar-menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+}
+
+.navbar-item {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 1em;
+    min-height: 3em;
+    text-decoration: none;
+    color: black
+
+}
+
+.search-form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.search-form .wrap {
+    padding: 3px;
+}
+
+.wrap input, .wrap button {
+    font-size: 20px;
+    font-size: 17px;
+    padding: 1px 5px;
+
+}
+
+
+i {
+    margin-right: 2px;
+}
+
+.user-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 28% 70%;
+    grid-column-gap: 2%;
+    margin: 2px auto;
+    /* border: 1px solid black; */
+}
+
+.user-profile, .portfolio-summary, .portfolio-detail, .transaction-history,  .watchlist {
+    border: 1px solid lightgray;
+    box-shadow: 0px 2px 3px lightgray;
+    margin: 1vh 0;
+    padding: 1em;
+    min-height: 20vh;
+    border-radius: 8px;
+    font-size: 18px;
+    line-height:2em;
+}
+
+.user-profile ul, h3 {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    margin: 0;
+    font-size: 15px;
+}
+
+aside a {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1vh;
+    border: 1px solid black;
+    min-height: 4vh;
+    text-decoration: none;
+    color: #e8c303;
+    background-color: black;
+    border-radius: 4px;
+    font-size: 18px;
+    font-style: normal;
+    padding: 0.5em 0;
+}
+
+table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+table tr td {
+    padding: 0 0.3em;
+    text-align: center;
+    font-size: 15px;
+}
+.portfolio-detail .wrap,
+.portfolio-summary .wrap,
+.transaction-history .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.portfolio-detail h3 a,
+.portfolio-summary h3 a,
+.transaction-history h3 a{
+    border-radius: 4px;
+    color: #e8c303;
+    background-color: black;
+    text-align: center;
+    font-size: 18px;
+    min-width: 150px;
+    min-height: 3vh;
+    line-height: 4vh;
+}

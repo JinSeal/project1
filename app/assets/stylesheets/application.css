@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+* a:hover, * button:hover {
+    color: #e8c303 !important;
+    text-decoration: underline;
+}
+
+header.main{
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(10,10,10,0.1), 0 0 0 1px rgba(10,10,10,0.1);
+    min-height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 55px;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1152px;
+}

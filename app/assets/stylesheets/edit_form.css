@@ -1,0 +1,13 @@
+
+.user-edit-form label, .user-edit-form input {
+    font-size: 16px;
+    margin: 3px;
+}
+
+.user-edit-form legend {
+    padding-top: 1em;
+}
+
+.user-edit-form input.disabled {
+    background-color: lightgray
+}
