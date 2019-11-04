@@ -7,3 +7,5 @@ module.exports = environment.toWebpackConfig()
 config.assets.digest = true
 
 config.assets.compile = true
+
+config.assets.js_compressor = Uglifier.new(harmony: true)
