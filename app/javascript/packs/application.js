@@ -16,3 +16,4 @@ require("turbolinks").start()
 // const imagePath = (name) => images(name, true)
 
 //= require jquery
+//= require jquery_ujs
