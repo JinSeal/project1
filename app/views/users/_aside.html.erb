@@ -17,8 +17,16 @@
 
         <% unless current_page?('users/:id/edit') %>
         <div class="control">
-            <%= link_to "Trade", :method => 'get' %>
-            <%= link_to "Edit Profile", "users/#{@current_user.id}/edit", :method => 'get' %>
+            <div class="">
+            <%= link_to "Trade"%>
+            <div class="form mini-form">
+                <%= simple_form_for Transaction.new, :url => '/transactions/:symbol', :method => 'get' do |f|%>
+                 <%= f.input :symbol, label: "Enter Stock Symbol", required: true %>
+                 <%= f.submit "Next"%>
+                <% end %>
+            </div>
+            </div>
+            <a href="/users/<%= @current_user.id %>/edit">Edit Profile</a>
             <%= link_to "Logout", login_path, :method => 'delete' %>
         </div>
         <% end %>

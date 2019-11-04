@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
     resources :portfolios
 
-    resources :transactions, :only => ["new", 'create', 'index']
+    resources :transactions, :only => [ 'create', 'index']
+
+    get 'transactions/:symbol' => "transactions#new", :as => 'newtransaction'
 
 end

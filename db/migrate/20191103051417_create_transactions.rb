@@ -8,6 +8,8 @@ class CreateTransactions < ActiveRecord::Migration[6.0]
             t.integer :fund_id
             t.integer :number
             t.numeric :price
+            t.integer :on_hand
+            t.numeric :avg_cost
 
             t.timestamps
         end

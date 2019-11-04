@@ -12,13 +12,12 @@
 .form{
 	min-width: 400px;
 	padding: 10px 20px;
-	background: #f4f7f8;
+	background: white;
 	margin: 10px auto;
 	padding: 20px;
-	background: #f4f7f8;
 	border-radius: 8px;
 	font-family: Georgia, "Times New Roman", Times, serif;
-    box-shadow: 1px 1px 2px lightgray;
+    box-shadow: 0px 0px 3px lightgray;
 }
 .form fieldset{
 	border: none;
@@ -71,6 +70,7 @@
 .form input[type="url"]:focus,
 .form textarea:focus,
 .form select:focus,
+.form input.readonly,
 .form input.disabled{
 	background: #d2d9dd;
 }
@@ -138,4 +138,24 @@
     font-size: 18px;
     font-style: normal;
 	padding: 0.5em 0;
+}
+
+.mini-form{
+    min-width: 80px !important;
+    padding-top: 0;
+    margin-top: 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+.mini-form button,
+.mini-form input{
+    margin: 3px !important;
+    height: 5vh;
+    padding: 0 !important;
+
+}
+
+.big-form{
+    box-shadow: none !important
 }

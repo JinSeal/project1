@@ -21,6 +21,8 @@
                     <td>Trade</td>
                     <td>Volumn</td>
                     <td>Purchase Price</td>
+                    <td>Unit on Hand</td>
+                    <td>Avg Cost</td>
                     <td>Folio ID</td>
 
                 </tr>
@@ -31,7 +33,9 @@
                     <td><%= transaction.symbol %></td>
                     <td><%= transaction.trade_type %></td>
                     <td><%= transaction.number %></td>
-                    <td><%= transaction.price %></td>
+                    <td><%= number_to_currency transaction.price %></td>
+                    <td><%= transaction.on_hand %></td>
+                    <td><%= number_to_currency transaction.avg_cost %></td>
                     <td><%= transaction.portfolio_id %></td>
 
                 </tr>

@@ -16,10 +16,7 @@ class UsersController < ApplicationController
     end
 
     def edit
-        begin
-        rescue
-            redirect_to root_path
-        end
+
     end
 
     def update

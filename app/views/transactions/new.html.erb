@@ -1,5 +1,37 @@
 <%= render :partial => '/users/nav' %>
 <div class="user-content">
+
     <%= render :partial => '/users/aside' %>
-    <h2>Transaction History</h2>    
+    <main class="user-main">
+        <div class="new-transaction">
+            <h3>
+                <div class="wrap">
+                    <span>
+                        New Transaction
+                    </span>
+                    <%= link_to "Back", root_path %>
+                </div>
+            </h3>
+<div class="form big-form">
+            <% if @msg.present? %>
+            <p><%= @msg %></p>
+            <% else %>
+            <%= simple_form_for @new_transaction do |f| %>
+                <%= f.input :symbol, required: true, :value=> @symbol, readonly: true %>
+                <%= f.input :trade_type, :collection => ["Buy", "Sell"], required: true%>
+                <%= f.input :portfolio_id, :collection => @current_user.portfolios.pluck(:name, :id), required: true%>
+
+                <%= f.input :number, required: true, input_html: { min: '0', step: '1' } %>
+                <%= f.input :price, required: true, :value=> @new_transaction, readonly: true%>
+
+
+                <%= f.label "Total:  "%>
+                <label>Fund Balance: <%= number_to_currency @current_user.balance %></label>
+
+                <%= f.submit "Order" %>
+            <% end %>
+            <% end %>
+        </div>
+        </div>
+    </main>
 </div>

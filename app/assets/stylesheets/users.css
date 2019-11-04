@@ -50,7 +50,12 @@ i {
     /* border: 1px solid black; */
 }
 
-.user-profile, .portfolio-summary, .portfolio-detail, .transaction-history,  .watchlist {
+.user-profile,
+.portfolio-summary,
+.portfolio-detail,
+.transaction-history,
+.new-transaction,
+.watchlist {
     border: 1px solid lightgray;
     box-shadow: 0px 2px 3px lightgray;
     margin: 1vh 0;
@@ -97,7 +102,8 @@ table tr td {
 }
 .portfolio-detail .wrap,
 .portfolio-summary .wrap,
-.transaction-history .wrap {
+.transaction-history .wrap,
+.new-transaction .wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -105,7 +111,8 @@ table tr td {
 
 .portfolio-detail h3 a,
 .portfolio-summary h3 a,
-.transaction-history h3 a{
+.transaction-history h3 a,
+.new-transaction h3 a {
     border-radius: 4px;
     color: #e8c303;
     background-color: black;

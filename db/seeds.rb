@@ -20,9 +20,9 @@ p4 = Portfolio.create(:name => 'Portfolio 4')
 puts "#{ Portfolio.count } portfolios created"
 
 Transaction.destroy_all
-t1 = Transaction.create(:settlment_date => "2019-01-03", :portfolio_id => 1, :trade_type => "Buy", :symbol => 'GOOG', :number => 5, :price => 1045.85)
-t2 = Transaction.create(:settlment_date => "2019-01-01", :portfolio_id => 1, :trade_type => "Buy", :symbol => 'MSFT', :number => 100, :price => 102.06)
-t3 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Sell", :symbol => 'MSFT', :number => 50, :price => 129.77)
-t4 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Buy", :symbol => 'MSFT', :number => 100, :price => 129.77)
-t5 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Sell", :symbol => 'MSFT', :number => 50, :price => 129.77)
+t1 = Transaction.create(:settlment_date => "2019-01-03", :portfolio_id => 1, :trade_type => "Buy", :symbol => 'GOOG', :number => 5, :price => 1045.85, :on_hand => 5, :avg_cost => 1045.85)
+t2 = Transaction.create(:settlment_date => "2019-01-01", :portfolio_id => 1, :trade_type => "Buy", :symbol => 'MSFT', :number => 100, :price => 102.06, :on_hand => 100, :avg_cost => 102.06)
+t3 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Sell", :symbol => 'MSFT', :number => 50, :price => 129.77, :on_hand => 50, :avg_cost => 102.06)
+t4 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Buy", :symbol => 'MSFT', :number => 100, :price => 129.77, :on_hand => 150, :avg_cost => 120.53)
+t5 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Sell", :symbol => 'MSFT', :number => 50, :price => 129.77, :on_hand => 100, :avg_cost => 120.53)
 puts "#{ Transaction.count } transactions created"

@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2019_11_03_051417) do
     t.integer "fund_id"
     t.integer "number"
     t.decimal "price"
+    t.integer "on_hand"
+    t.decimal "avg_cost"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

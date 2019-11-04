@@ -64,19 +64,19 @@
                     <td>Change %</td>
                     <td>Today's Change</td>
                 </tr>
-                <% @current_user.portfolio_ids.each do |port_id| %>
-                <% if get_symbols(port_id).present? %>
-                <% get_symbols(port_id).each do |symbol| %>
+                <% @current_user.portfolio_ids.each do |folio_id| %>
+                <% if get_symbols(folio_id).present? %>
+                <% get_symbols(folio_id).each do |symbol| %>
                 <% info = StockQuote::Stock.quote symbol %>
                 <tr>
-                    <td><%= port_id %></td>
+                    <td><%= folio_id %></td>
                     <td><%= symbol %></td>
                     <td><%= info.company_name %></td>
-                    <td><%= calc_share_num(port_id, symbol) %></td>
-                    <td><%= number_to_currency cal_avg_price(port_id, symbol) %></td>
+                    <td><%= @current_user.transactions.where(portfolio_id: folio_id).where(symbol: symbol).last.on_hand %></td>
+                    <td><%= number_to_currency @current_user.transactions.where(portfolio_id: folio_id).where(symbol: symbol).last.avg_cost %></td>
                     <td><%= number_to_currency info.latest_price %></td>
                     <td><%= number_to_percentage info.change_percent*100 %></td>
-                    <td><%= number_to_currency (info.latest_price-info.previous_close)* calc_share_num(port_id, symbol)%></td>
+                    <td><%= number_to_currency (info.latest_price-info.previous_close)* @current_user.transactions.where(portfolio_id: folio_id).where(symbol: symbol).last.on_hand%></td>
                 </tr>
                 <% end %>
                 <% end %>
