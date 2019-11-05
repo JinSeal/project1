@@ -95,7 +95,8 @@
 }
 
 .form input[type="submit"],
-.form input[type="button"]
+.form input[type="button"],
+#trade_link
 {
 	position: relative;
 	display: block;
@@ -109,6 +110,11 @@
 	border-radius: 4px;
 	width: 100%;
 	margin-bottom: 10px;
+}
+
+#trade_link {
+    padding: 0.5em 0;
+    outline: none;
 }
 .form input[type="submit"]:hover,
 .form input[type="button"]:hover,
@@ -155,9 +161,8 @@
     margin: 3px !important;
     height: 5vh;
     padding: 0 !important;
-
 }
 
-.big-form{
-    box-shadow: none !important
+.trade_form #trade_form {
+    display: none;
 }

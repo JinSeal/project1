@@ -17,15 +17,15 @@
 
         <% unless current_page?('users/:id/edit') %>
         <div class="control">
-            <div class="">
-            <%= link_to "Trade"%>
-            <div class="form mini-form">
-                <%= simple_form_for Transaction.new, :url => '/transactions/:symbol', :method => 'get' do |f|%>
-                 <%= f.input :portfolio_id, label: "Choose a portfolio", :collection => @current_user.portfolios.pluck(:name, :id), required: true%>
-                 <%= f.input :symbol, placeholder: "Enter Stock Symbol", label: false, required: true %>
-                 <%= f.submit "Next"%>
-                <% end %>
-            </div>
+            <div class="trade_form">
+                <button id ='trade_link'>Trade</button>
+                <div class="form mini-form" id="trade_form">
+                    <%= simple_form_for Transaction.new, :url => '/transactions/:symbol', :method => 'get' do |f|%>
+                    <%= f.input :portfolio_id, label: "Choose a portfolio", :collection => @current_user.portfolios.pluck(:name, :id), required: true%>
+                    <%= f.input :symbol, placeholder: "Enter Stock Symbol", label: false, required: true %>
+                    <%= f.submit "Next"%>
+                    <% end %>
+                </div>
             </div>
             <a href="/users/<%= @current_user.id %>/edit">Edit Profile</a>
             <%= link_to "Logout", login_path, :method => 'delete' %>

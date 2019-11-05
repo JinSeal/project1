@@ -115,7 +115,7 @@
                     <td><%= item.symbol %></td>
                     <td><%= info.company_name %></td>
                     <td><%= number_to_currency info.latest_price %></td>
-                    <td><%= number_to_percentage info.change_percent %></td>
+                    <td><%= number_to_percentage info.change_percent*100 %></td>
                     <td><%= info.volume %></td>
                     <td><%= number_to_currency info.previous_close %></td>
                     <td><%= number_to_currency info.open %></td>

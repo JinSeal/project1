@@ -25,15 +25,21 @@
                 <%= f.input :number, required: true, input_html: { min: '0', step: '1' } %>
                 <%= f.input :price, required: true, readonly: true%>
 
-                <label id="transaction-total">Total: </label>
-                <label id="transaction-fund-balance">Fund Balance: <%= number_to_currency @current_user.balance %></label>
+
                 <% if @current_user.transactions.where(portfolio_id: @new_transaction.portfolio_id).where(symbol: @new_transaction.symbol).last.present? %>
-                <label>Share on hand: <%= @current_user.transactions.where(portfolio_id: @new_transaction.portfolio_id).where(symbol: @new_transaction.symbol).last.on_hand %></label>
+                <label id='transaction_share_on_hand'>Share on hand: <%= @current_user.transactions.where(portfolio_id: @new_transaction.portfolio_id).where(symbol: @new_transaction.symbol).last.on_hand %></label>
                 <% else  %>
-                <label>Share on hand: 0</label>
+                <label id='transaction_share_on_hand'>Share on hand: 0</label>
                 <% end %>
-                <label id="transaction-msg"></label>
+
+
+                <label id="transaction_total">Total: </label>
+                <label id="transaction_fund">Fund: <%= number_to_currency @current_user.balance %></label>
+
+                <label id="transaction_msg"></label>
+                <div class="transaction_button" >
                 <%= f.submit "Order" %>
+                </div>
             <% end %>
             <% end %>
         </div>

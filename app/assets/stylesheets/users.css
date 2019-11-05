@@ -125,10 +125,6 @@ table tr td {
     line-height: 4vh;
 }
 
-.show {
-    display: inherit;
-}
-
 .portfolio-form {
     max-width: 200px;
     position: absolute;

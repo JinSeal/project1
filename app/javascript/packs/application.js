@@ -5,6 +5,7 @@
 
 require("@rails/ujs").start()
 require("turbolinks").start()
+require("jquery")
 
 
 
@@ -17,6 +18,3 @@ require("turbolinks").start()
 
 //= require jquery
 //= require jquery_ujs
-
-
-import 'bootstrap/dist/js/bootstrap';
