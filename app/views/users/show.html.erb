@@ -89,12 +89,49 @@
         <% end %>
 
         <div class="watchlist">
-            <h3>Watchlist</h3>
+            <h3>
+                <div class="wrap">
+                    <span>
+                        Watchlist
+                    </span>
+                    <%= link_to "New Item", new_watchlist_path %>
+                </div>
+            </h3>
+            <% if @current_user.watchlists.present? %>
+            <table>
+                <tr>
+                    <td>Symbol</td>
+                    <td>Company Name</td>
+                    <td>Latest Price</td>
+                    <td>Change %</td>
+                    <td>Volume</td>
+                    <td>Prev Close</td>
+                    <td>Open</td>
+                    <td></td>
+                </tr>
+            <% @current_user.watchlists.each do |item| %>
+            <% info = StockQuote::Stock.quote item.symbol %>
+                <tr>
+                    <td><%= item.symbol %></td>
+                    <td><%= info.company_name %></td>
+                    <td><%= number_to_currency info.latest_price %></td>
+                    <td><%= number_to_percentage info.change_percent %></td>
+                    <td><%= info.volume %></td>
+                    <td><%= number_to_currency info.previous_close %></td>
+                    <td><%= number_to_currency info.open %></td>
+                    <td><a href="/watchlists/<%= item.id%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
+                </tr>
+                <% end %>
+            </table>
+            <% end %>
         </div>
         <% if params[:controller] == "portfolios" %>
         <%= render :partial => 'users/portfolio_form' %>
         <% end %>
 
+        <% if params[:controller] == "watchlists" %>
+        <%= render :partial => 'users/watchlist_form' %>
+        <% end %>
         <div class="message box">
             <%= @msg %>
         </div>

@@ -11,7 +11,7 @@
 
         <ul class="account-info">
             <li>Strategy: <%= @current_user.strategy %></li>
-            <li>Account Balance: <%= @current_user.balance %></li>
+            <li>Account Balance: <%= number_to_currency @current_user.balance %></li>
             <li>Total Profit/Loss: coming soon</li>
         </ul>
 
@@ -21,7 +21,8 @@
             <%= link_to "Trade"%>
             <div class="form mini-form">
                 <%= simple_form_for Transaction.new, :url => '/transactions/:symbol', :method => 'get' do |f|%>
-                 <%= f.input :symbol, label: "Enter Stock Symbol", required: true %>
+                 <%= f.input :portfolio_id, label: "Choose a portfolio", :collection => @current_user.portfolios.pluck(:name, :id), required: true%>
+                 <%= f.input :symbol, placeholder: "Enter Stock Symbol", label: false, required: true %>
                  <%= f.submit "Next"%>
                 <% end %>
             </div>

@@ -39,6 +39,7 @@
 .form input[type="search"],
 .form input[type="time"],
 .form input[type="url"],
+.form input[type="tel"],
 .form textarea,
 .form select {
 	font-family: Georgia, "Times New Roman", Times, serif;
@@ -68,6 +69,7 @@
 .form input[type="search"]:focus,
 .form input[type="time"]:focus,
 .form input[type="url"]:focus,
+.form input[type="tel"]:focus,
 .form textarea:focus,
 .form select:focus,
 .form input.readonly,

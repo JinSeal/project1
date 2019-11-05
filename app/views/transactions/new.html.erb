@@ -17,17 +17,22 @@
             <p><%= @msg %></p>
             <% else %>
             <%= simple_form_for @new_transaction do |f| %>
+                <%= f.input :portfolio_id, label:"Portfolio ID", required: true, readonly: true %>
                 <%= f.input :symbol, required: true, :value=> @symbol, readonly: true %>
                 <%= f.input :trade_type, :collection => ["Buy", "Sell"], required: true%>
-                <%= f.input :portfolio_id, :collection => @current_user.portfolios.pluck(:name, :id), required: true%>
+
 
                 <%= f.input :number, required: true, input_html: { min: '0', step: '1' } %>
-                <%= f.input :price, required: true, :value=> @new_transaction, readonly: true%>
+                <%= f.input :price, required: true, readonly: true%>
 
-
-                <%= f.label "Total:  "%>
-                <label>Fund Balance: <%= number_to_currency @current_user.balance %></label>
-
+                <label id="transaction-total">Total: </label>
+                <label id="transaction-fund-balance">Fund Balance: <%= number_to_currency @current_user.balance %></label>
+                <% if @current_user.transactions.where(portfolio_id: @new_transaction.portfolio_id).where(symbol: @new_transaction.symbol).last.present? %>
+                <label>Share on hand: <%= @current_user.transactions.where(portfolio_id: @new_transaction.portfolio_id).where(symbol: @new_transaction.symbol).last.on_hand %></label>
+                <% else  %>
+                <label>Share on hand: 0</label>
+                <% end %>
+                <label id="transaction-msg"></label>
                 <%= f.submit "Order" %>
             <% end %>
             <% end %>

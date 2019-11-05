@@ -103,7 +103,8 @@ table tr td {
 .portfolio-detail .wrap,
 .portfolio-summary .wrap,
 .transaction-history .wrap,
-.new-transaction .wrap {
+.new-transaction .wrap,
+.watchlist .wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -112,7 +113,8 @@ table tr td {
 .portfolio-detail h3 a,
 .portfolio-summary h3 a,
 .transaction-history h3 a,
-.new-transaction h3 a {
+.new-transaction h3 a,
+.watchlist h3 a {
     border-radius: 4px;
     color: #e8c303;
     background-color: black;
@@ -121,4 +123,22 @@ table tr td {
     min-width: 150px;
     min-height: 3vh;
     line-height: 4vh;
+}
+
+.show {
+    display: inherit;
+}
+
+.portfolio-form {
+    max-width: 200px;
+    position: absolute;
+    top: 250px;
+    left:84%;
+}
+
+.watchlist-form {
+    max-width: 200px;
+    position: relative;
+    top: -10%;
+    left: 50%;
 }

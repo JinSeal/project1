@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_051417) do
+ActiveRecord::Schema.define(version: 2019_11_05_001211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_051417) do
     t.integer "portfolio_id"
     t.string "trade_type"
     t.string "symbol"
-    t.integer "fund_id"
+    t.integer "fund_code_id"
     t.integer "number"
     t.decimal "price"
     t.integer "on_hand"
@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(version: 2019_11_03_051417) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+  end
+
+  create_table "watchlists", force: :cascade do |t|
+    t.string "symbol"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

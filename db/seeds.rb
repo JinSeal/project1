@@ -15,8 +15,6 @@ puts "#{ User.count } users created"
 Portfolio.destroy_all
 p1 = Portfolio.create(:name => 'Portfolio 1', :user_id => 1)
 p2 = Portfolio.create(:name => 'Portfolio 2', :user_id => 1)
-p3 = Portfolio.create(:name => 'Portfolio 3')
-p4 = Portfolio.create(:name => 'Portfolio 4')
 puts "#{ Portfolio.count } portfolios created"
 
 Transaction.destroy_all
@@ -26,3 +24,8 @@ t3 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :tr
 t4 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Buy", :symbol => 'MSFT', :number => 100, :price => 129.77, :on_hand => 150, :avg_cost => 120.53)
 t5 = Transaction.create(:settlment_date => "2019-04-23", :portfolio_id => 1, :trade_type => "Sell", :symbol => 'MSFT', :number => 50, :price => 129.77, :on_hand => 100, :avg_cost => 120.53)
 puts "#{ Transaction.count } transactions created"
+
+
+w1 = Watchlist.create(:symbol => "GOOG", :user_id => 1)
+w2 = Watchlist.create(:symbol => "MSFT", :user_id => 1)
+puts "#{ Watchlist.count } watchlist items created"

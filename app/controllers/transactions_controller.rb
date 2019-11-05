@@ -2,6 +2,7 @@ class TransactionsController < ApplicationController
   def new
     @new_transaction = Transaction.new
     @new_transaction.symbol = new_params[:symbol].upcase
+    @new_transaction.portfolio_id = new_params[:portfolio_id]
     begin
     info = StockQuote::Stock.quote new_params[:symbol]
     @new_transaction.price = info.latest_price
@@ -31,7 +32,7 @@ create_params[:price], create_params[:number],  create_params[:trade_type]), :se
 
     private
     def new_params
-        params.require(:transaction).permit(:symbol)
+        params.require(:transaction).permit(:symbol, :portfolio_id)
     end
 
     def create_params
