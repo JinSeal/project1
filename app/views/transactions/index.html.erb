@@ -13,18 +13,28 @@
                     <%= link_to "Back", root_path %>
                 </div>
             </h3>
+
+            <%= form_tag transactions_path, :method => 'get', :id => "transactions_search", :class => 'search-form' do %>
+            <div class="wrap">
+                <%= text_field_tag :search, params[:search], placeholder: "Search by symbol or trade", :class => 'test' %>
+            </div>
+            <div class="wrap">
+                <button><span><i class='fa fa-search'></i></span><span>Search</span></button>
+            </div>
+            <div class="wrap">
+                <a href='/transactions/'><span><i class="glyphicon glyphicon-remove"></i></span><span>Reset Filter</span></a>
+            </div>
+            <% end %>
             <table>
                 <tr>
-                    <td>Settlment Date</td>
-
-                    <td>Symbol</td>
-                    <td>Trade</td>
-                    <td>Volumn</td>
-                    <td>Purchase Price</td>
-                    <td>Unit on Hand</td>
-                    <td>Avg Cost</td>
-                    <td>Folio ID</td>
-
+                    <th><%= sortable "settlment_date", "Date" %></th>
+                    <th><%= sortable "symbol", "Symbol" %></th>
+                    <th><%= sortable "trade_type", "Trade" %></th>
+                    <th><%= sortable "number", "Volume" %></th>
+                    <th><%= sortable "price", "Purchase Price" %></th>
+                    <th><%= sortable "on_hand", "On Hand" %></th>
+                    <th><%= sortable "avg_cost", "Avg Cost" %></th>
+                    <th><%= sortable "portfolio_id", "Folio ID" %></th>
                 </tr>
                 <% @all_transactions.each do |transaction|%>
                 <tr>
@@ -41,6 +51,7 @@
                 </tr>
                 <% end %>
             </table>
+            <div id="transactions"><%= render 'transactions' %></div>
         </div>
     </main>
 </div>

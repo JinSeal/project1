@@ -1,0 +1,54 @@
+<%= render :partial => '/users/nav' %>
+
+<div class="admin-content">
+    <div class="admin-control">
+        <%= link_to "Admin Users", login_path, :method => 'get' %>
+        <%= link_to "Admin Funds", login_path, :method => 'get' %>
+        <a href="/users/<%= @current_user.id %>/edit">Edit Profile</a>
+        <%= link_to "Logout", login_path, :method => 'delete' %>
+    </div>
+
+    <h1>User Index</h1>
+
+
+    <%= form_for_filterrific @filterrific do |f| %>
+    <div>
+        Search
+        <%= f.text_field(
+        :search_query,
+        class: 'filterrific-periodically-observed'
+        ) %>
+    </div>
+
+        <div>
+          Strategy
+          <%= f.select(
+            :with_strategy,
+            @filterrific.select_options[:with_strategy],
+            { include_blank: '- Any -' }
+          ) %>
+        </div>
+    <div>
+        Sorted by
+        <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+    </div>
+
+    <div >
+        <button>Search</button>
+    </div>
+
+    <div>
+        <%= link_to(
+        'Reset filters',
+        reset_filterrific_url,
+        ) %>
+    </div>
+
+    <%= render_filterrific_spinner %>
+    <% end %>
+
+    <%= render(
+    partial: 'users/list',
+    locals: { users: @users }
+    ) %>
+</div>

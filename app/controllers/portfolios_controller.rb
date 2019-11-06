@@ -22,8 +22,6 @@ class PortfoliosController < ApplicationController
         redirect_to root_path
     end
 
-    def show
-    end
 
     def destroy
         portfolio = Portfolio.find params[:id]

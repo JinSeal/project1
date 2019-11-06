@@ -19,6 +19,8 @@ const button = () => {
     }
     else if (total <= fund && $('#transaction_trade_type').val() === "Buy") {
         $('.transaction_button').show()
+        $('#transaction_msg').text(``).css('color', 'red')
+
         $('form.new_transaction').attr('action', '/transactions')
     }
     else if (number > onHand && $('#transaction_trade_type').val() === "Sell") {
@@ -28,15 +30,37 @@ const button = () => {
     }
     else if (number <= onHand && $('#transaction_trade_type').val() === "Sell") {
         $('.transaction_button').show()
+        $('#transaction_msg').text(``).css('color', 'red')
+
         $('form.new_transaction').attr('action', '/transactions')
     }
 }
 
+const figureColor = () => {
+    $('.figure').each(()=>{
+        let text = $(this).text()
+        if (Number(text) >= 0) {
+            $(this).css('color', 'green')
+        } else {
+            $(this).css('color', 'red')
+        }
+    })
+}
+
+const changeAction = () => {
+    $('.search-form').attr('action', `/watchlists/${$('#nav-search-input').val()}`)
+}
 
 const main = function() {
     $('#transaction_number, #transaction_trade_type').on("change", ()=>{calcTotal(); button()})
 
+    $('#nav-search-input').on('change', changeAction())
+
     $('#trade_link').click(()=>{$('#trade_form').toggle()})
+
+
+    figureColor()
 }
+
 
 $(document).ready(main)

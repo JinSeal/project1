@@ -1,0 +1,36 @@
+<div id="filterrific_results">
+
+    <div>
+        <%= page_entries_info @users%>
+        <%= will_paginate @users %>
+
+    </div>
+
+    <table>
+        <tr>
+            <th><%= filterrific_sorting_link(@filterrific, :account_no) %></th>
+
+            <th><%= filterrific_sorting_link(@filterrific, :email) %></th>
+            <th><%= filterrific_sorting_link(@filterrific, :full_name) %></th>
+            <th><%= filterrific_sorting_link(@filterrific, :strategy) %></th>
+            <th>Address</th>
+            <th>Moile</th>
+            <th>Sub</th>
+        </tr>
+        <% @users.each do |user| %>
+        <tr>
+            <td><%= user.account_no %></td>
+
+            <td class='left'>
+                <a href="/users/<%= user.id %>/edit"><%= user.email %></a></td>
+            <td><%= user.full_name %></td>
+            <td><%= user.strategy %></td>
+            <td class='left'><%= user.address %></td>
+            <td><%= user.mobile %></td>
+            <td><%= human_boolean(user.subscription) %></td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+
+<%= will_paginate @users %>

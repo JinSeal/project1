@@ -1,0 +1,42 @@
+.admin-content {
+    width: 100%;
+    margin: 2px auto;
+    /* border: 1px solid black; */
+}
+
+.admin-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-control a {
+    margin: 0.5em 0.5em;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1vh;
+    border: 1px solid black;
+    min-height: 4vh;
+    text-decoration: none;
+    color: #e8c303;
+    background-color: black;
+    border-radius: 4px;
+    font-size: 18px;
+    font-style: normal;
+    padding: 0.3em 0;
+}
+
+td.left {
+    text-align: left;
+}
+
+.new_filterrific {
+    display: flex;
+}
+
+.new_filterrific div {
+    margin: 1em 3em 3em 0;
+    font-size: 16px;
+}

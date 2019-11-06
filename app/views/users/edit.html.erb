@@ -5,7 +5,7 @@
     <main class="user-edit-form">
         <div class="portfolio-summary">
             <div class="form big-form">
-            <%= simple_form_for @current_user do |f| %>
+            <%= simple_form_for @user do |f| %>
             <fieldset>
             <legend><span class="number">1</span> Personal Details</legend>
 
@@ -27,7 +27,7 @@
             </fieldset>
             <%= f.submit "Save Change" %>
             <% end %>
-            <%= link_to "Back to InvestorHub", @current_user %>
+            <%= link_to "Back", @current_user %>
             </div>
         </div>
 

@@ -10,9 +10,10 @@ class CreateUsers < ActiveRecord::Migration[6.0]
             t.text :mobile
             t.float :balance
             t.text :image
-            t.text :password
+            t.text :password, :default => 'chicken'
             t.boolean :subscription, :default => true
             t.date :dob
+            t.boolean :admin, :default => false
 
             t.timestamps
         end

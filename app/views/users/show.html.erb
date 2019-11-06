@@ -13,30 +13,46 @@
                     <%= link_to "New Portfolio", new_portfolio_path %>
                 </div>
             </h3>
-            <p><%= @msg %></p>
             <table>
-                <% if @current_user.portfolios.present? %>
                 <tr>
-                    <td>ID</td>
-                    <td>Portfolio Name</td>
-                    <td>Purchase Price</td>
-                    <td>Today's Change</td>
-                    <td>Total Profit/Loss</td>
-                    <td></td>
+                    <th>ID</th>
+                    <th>Folio Name</th>
+                    <th>Investment</th>
+                    <th>Today's Change</th>
+                    <th>Total Profit/Loss</th>
+                    <th></th>
                 </tr>
-                <% @current_user.portfolios.sort.each  do |portfolio| %>
+                <% unless @current_user.portfolios[0].transactions.blank? %>
+                <% portfolios_summary = get_portfolio_summary() %>
+                <% if portfolios_summary.present? %>
+                <% portfolios_summary.each  do |summary| %>
                 <tr>
-                    <td><%= portfolio.id %></td>
-                    <td><%= portfolio.name %></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="/portfolios/<%= portfolio.id%>/edit">Edit</a></td>
-                    <% if check_empty_portfolio(portfolio.id) %>
-                    <td><a href="/portfolios/<%= portfolio.id%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
-                    <% else %>
+                    <td><%= summary[:id] %></td>
+                    <td><%= summary[:name] %></td>
+                    <td><%= number_to_currency summary[:investment] %></td>
+                    <td class='figure'><%= number_to_currency summary[:today_change] %></td>
+                    <td class='figure'><%= number_to_currency summary[:total_profit] %></td>
+                    <td><a href="/portfolios/<%= summary[:id] %>/edit">Edit</a></td>
+                    <% if check_empty_portfolio(summary[:id]) %>
+                    <td><a href="/portfolios/<%= summary[:id]%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
                     <% end %>
                 </tr>
+                <% end %>
+                <% else %>
+                <% @portfolios.each do |folio| %>
+                <tr>
+                    <td><%= folio.id %></td>
+                    <td><%= folio.name %></td>
+                    <td></td>
+                    <td class='figure'></td>
+                    <td class='figure'></td>
+                    <td><a href="/portfolios/<%= folio.id %>/edit">Edit</a></td>
+                    <% if check_empty_portfolio(folio.id) %>
+                    <td><a href="/portfolios/<%= folio.id%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
+                    <% end %>
+                </tr>
+
+                <% end %>
                 <% end %>
                 <% end %>
             </table>
@@ -56,35 +72,29 @@
             <table>
                 <tr>
                     <td title="Portfolio id">Folio</td>
-                    <td>Symbol</td>
-                    <td>Company Name</td>
-                    <td>No.</td>
-                    <td>Avg Purchase</td>
-                    <td>Latest Price</td>
-                    <td>Change %</td>
-                    <td>Today's Change</td>
+                    <th>Symbol</th>
+                    <th>Company Name</th>
+                    <th>No.</th>
+                    <th>Avg Purchase</th>
+                    <th>Latest Price</th>
+                    <th>Change %</th>
+                    <th>Change</th>
                 </tr>
-                <% @current_user.portfolio_ids.each do |folio_id| %>
-                <% if get_symbols(folio_id).present? %>
-                <% get_symbols(folio_id).each do |symbol| %>
-                <% info = StockQuote::Stock.quote symbol %>
+                <% portfolio_details = get_portfolio_details() %>
+                <% portfolio_details.each do |detail| %>
                 <tr>
-                    <td><%= folio_id %></td>
-                    <td><%= symbol %></td>
-                    <td><%= info.company_name %></td>
-                    <td><%= @current_user.transactions.where(portfolio_id: folio_id).where(symbol: symbol).last.on_hand %></td>
-                    <td><%= number_to_currency @current_user.transactions.where(portfolio_id: folio_id).where(symbol: symbol).last.avg_cost %></td>
-                    <td><%= number_to_currency info.latest_price %></td>
-                    <td><%= number_to_percentage info.change_percent*100 %></td>
-                    <td><%= number_to_currency (info.latest_price-info.previous_close)* @current_user.transactions.where(portfolio_id: folio_id).where(symbol: symbol).last.on_hand%></td>
+                    <td><%= detail[:folio_id] %></td>
+                    <td><%= detail[:symbol] %></td>
+                    <td><%= detail[:company_name] %></td>
+                    <td><%= detail[:on_hand] %></td>
+                    <td><%= number_to_currency detail[:avg_cost] %></td>
+                    <td><%= number_to_currency detail[:latest_price] %></td>
+                    <td class='figure'><%= number_to_percentage detail[:change_percent]*100 %></td>
+                    <td class='figure'><%= number_to_currency detail[:profit]%></td>
                 </tr>
-                <% end %>
-                <% end %>
                 <% end %>
             </table>
             <% end %>
-
-
         </div>
         <% end %>
 
@@ -100,31 +110,33 @@
             <% if @current_user.watchlists.present? %>
             <table>
                 <tr>
-                    <td>Symbol</td>
-                    <td>Company Name</td>
-                    <td>Latest Price</td>
-                    <td>Change %</td>
-                    <td>Volume</td>
-                    <td>Prev Close</td>
-                    <td>Open</td>
-                    <td></td>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Latest Price</th>
+                    <th>Change %</th>
+                    <th>Volume</th>
+                    <th>Prev Close</th>
+                    <th>Open</th>
+                    <th> </th>
                 </tr>
-            <% @current_user.watchlists.each do |item| %>
-            <% info = StockQuote::Stock.quote item.symbol %>
+
+                <% watchlists_info= get_watchlist_info() %>
+                <% watchlists_info.each do |info| %>
                 <tr>
-                    <td><%= item.symbol %></td>
-                    <td><%= info.company_name %></td>
-                    <td><%= number_to_currency info.latest_price %></td>
-                    <td><%= number_to_percentage info.change_percent*100 %></td>
-                    <td><%= info.volume %></td>
-                    <td><%= number_to_currency info.previous_close %></td>
-                    <td><%= number_to_currency info.open %></td>
-                    <td><a href="/watchlists/<%= item.id%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
+                    <td><%= info[:symbol] %></td>
+                    <td><%= info[:company] %></td>
+                    <td><%= number_to_currency info[:latest_price] %></td>
+                    <td class='figure'><%= number_to_percentage info[:change_percent]*100 %></td>
+                    <td><%= info[:volume] %></td>
+                    <td><%= number_to_currency info[:previous_close] %></td>
+                    <td><%= number_to_currency info[:open] %></td>
+                    <td><a href="/watchlists/<%= info[:id]%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
                 </tr>
                 <% end %>
             </table>
             <% end %>
         </div>
+
         <% if params[:controller] == "portfolios" %>
         <%= render :partial => 'users/portfolio_form' %>
         <% end %>

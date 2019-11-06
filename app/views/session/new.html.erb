@@ -1,8 +1,11 @@
 
 <div class="login-container">
+    <div class="button-wrap login-button-wrap">
+        <%= link_to "Sign in", login_path, :class=> "login-link here" %>
+        <%= link_to "Sign up", new_user_path, :class => "login-link" %>
+    </div>
 
-    <div class="form">
-        <%= render :partial => '/users/logcontrol' %>
+    <div class="form log-form">
         <% if flash[:error].present? %>
         <p><%= flash[:error] %></p>
         <% end %>

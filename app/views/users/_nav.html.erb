@@ -1,9 +1,9 @@
 <div class="navbar-menu">
     <div class="navbar-start">
         <% if @current_user.username.present? %>
-        <i class="glyphicon glyphicon-user"></i>Welcome back, <%= @current_user.username %>
+        <i class="glyphicon glyphicon-user"></i> Welcome back, <%= @current_user.username %>.
         <% else %>
-        <i class="glyphicon glyphicon-user"></i>Welcome back, <%= @current_user.email %>
+        <i class="glyphicon glyphicon-user"></i> Welcome back, <%= @current_user.email %>
         <% end %>
     </div>
     <div class="navbar-end">
@@ -17,13 +17,13 @@
         </div></a>
 
         <div class="navbar-item">
-            <form class="search-form" action="#" method="get">
+            <form class="search-form" action="" method="get">
                 <div class="wrap">
-                    <input type="text" name="search"  placeholder="Search for share or ETF">
+                    <input id='nav-search-input' type="text" name="symbol"  placeholder="Search for stocks or funds">
                 </div>
 
                 <div class="wrap">
-                    <button>
+                    <button id = 'nav-search-button'>
                         <span><i class="fa fa-search"></i></span>
                         <span>Search</span>
                     </button>

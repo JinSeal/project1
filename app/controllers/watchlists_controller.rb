@@ -5,8 +5,10 @@ class WatchlistsController < ApplicationController
   end
 
   def create
+    unless @current_user.watchlists.pluck(:symbol).include?(params[:watchlist][:symbol].upcase)
      watchlist = Watchlist.create(watchlist_params)
      watchlist.update(:user_id => @current_user.id)
+    end
      redirect_to root_path
   end
 
@@ -16,6 +18,11 @@ class WatchlistsController < ApplicationController
       watchlist.destroy
       redirect_to root_path
   end
+
+    def index
+        @info = StockQuote::Stock.quote params[:symbol]
+        render :show
+    end
 
     private
     def watchlist_params

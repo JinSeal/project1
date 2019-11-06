@@ -1,9 +1,11 @@
 
 <div class="login-container">
+    <div class="button-wrap login-button-wrap">
+        <%= link_to "Sign in", login_path, :class=> "login-link" %>
+        <%= link_to "Sign up", new_user_path, :class => "login-link here" %>
+    </div>
 
-    <div class="form">
-        <%= render :partial => 'logcontrol' %>
-
+    <div class="form log-form">
         <% if @user.errors.any? %>
         <ul>
             <% @user.errors.full_messages.each do |msg| %>
@@ -13,9 +15,10 @@
         <% end %>
 
         <%= simple_form_for @user do |f|%>
-        <%= f.input :email, as: :email%>
+        <%= f.input :email, as: :email, :error => false%>
         <%= f.input :password, as: :password%>
-        <%= f.input :password_confirmation %>
+        <%= f.input :password_confirmation, :error => false%>
         <%= f.submit "Sign Up" %>
         <% end %>
     </div>
+</div>

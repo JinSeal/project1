@@ -1,2 +1,25 @@
-<h1>Watchlists#show</h1>
-<p>Find me in app/views/watchlists/show.html.erb</p>
+<%= render :partial => '/users/nav' %>
+
+<div class="user-content">
+    <%= render :partial => '/users/aside' %>
+        <main class="share-info">
+            <h3>
+                <div class="wrap">
+                    <span>
+                        Share Information
+                    </span>
+                    <%= link_to "Back", root_path %>
+                </div>
+            </h3>
+            <div class="stock-info">
+                <div class="stock-main-stats">
+                    <p>Symbol: <%= @info.symbol %></p>
+                    <p>Company: <%= @info.company_name %></p>
+                    
+                </div>
+                <div class="stock-chart">
+                    Stock Chart Coming Oneday
+                </div>
+            </div>
+        </main>
+</div>

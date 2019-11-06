@@ -5,7 +5,6 @@ class CreateTransactions < ActiveRecord::Migration[6.0]
             t.integer :portfolio_id
             t.string :trade_type
             t.string :symbol
-            t.integer :fund_code_id
             t.integer :number
             t.numeric :price
             t.integer :on_hand

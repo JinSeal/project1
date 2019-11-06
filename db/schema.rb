@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_001211) do
+ActiveRecord::Schema.define(version: 2019_11_06_055933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,22 @@ ActiveRecord::Schema.define(version: 2019_11_05_001211) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "symbol"
+    t.string "name"
+    t.string "manager"
+    t.float "price"
+    t.float "return"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.date "settlment_date"
     t.integer "portfolio_id"
     t.string "trade_type"
     t.string "symbol"
-    t.integer "fund_code_id"
     t.integer "number"
     t.decimal "price"
     t.integer "on_hand"
@@ -46,9 +56,10 @@ ActiveRecord::Schema.define(version: 2019_11_05_001211) do
     t.text "mobile"
     t.float "balance"
     t.text "image"
-    t.text "password"
+    t.text "password", default: "chicken"
     t.boolean "subscription", default: true
     t.date "dob"
+    t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"

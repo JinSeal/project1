@@ -35,6 +35,12 @@ gem "date"
 
 gem 'jquery-rails'
 
+gem 'will_paginate'
+
+gem 'filterrific'
+
+gem 'faker'
+
 gem 'rails_12factor', group: :production
 
 group :development, :test do

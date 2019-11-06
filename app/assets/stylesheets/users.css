@@ -1,46 +1,4 @@
 
-.navbar-menu {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-}
-
-.navbar-item {
-    display: inline-flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 0 1em;
-    min-height: 3em;
-    text-decoration: none;
-    color: black
-
-}
-
-.search-form {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-}
-
-.search-form .wrap {
-    padding: 3px;
-}
-
-.wrap input, .wrap button {
-    font-size: 20px;
-    font-size: 17px;
-    padding: 1px 5px;
-
-}
-
-
-i {
-    margin-right: 2px;
-}
-
 .user-content {
     width: 100%;
     display: grid;
@@ -49,13 +7,13 @@ i {
     margin: 2px auto;
     /* border: 1px solid black; */
 }
-
 .user-profile,
 .portfolio-summary,
 .portfolio-detail,
 .transaction-history,
 .new-transaction,
-.watchlist {
+.watchlist,
+.share-info {
     border: 1px solid lightgray;
     box-shadow: 0px 2px 3px lightgray;
     margin: 1vh 0;
@@ -73,38 +31,12 @@ i {
     font-size: 15px;
 }
 
-aside a {
-    width: 100%;
-    display: inline-flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 1vh;
-    border: 1px solid black;
-    min-height: 4vh;
-    text-decoration: none;
-    color: #e8c303;
-    background-color: black;
-    border-radius: 4px;
-    font-size: 18px;
-    font-style: normal;
-    padding: 0.5em 0;
-}
-
-table {
-    margin: 0 auto;
-    width: 100%;
-}
-
-table tr td {
-    padding: 0 0.3em;
-    text-align: center;
-    font-size: 15px;
-}
 .portfolio-detail .wrap,
 .portfolio-summary .wrap,
 .transaction-history .wrap,
 .new-transaction .wrap,
-.watchlist .wrap {
+.watchlist .wrap,
+.share-info .wrap{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -114,7 +46,8 @@ table tr td {
 .portfolio-summary h3 a,
 .transaction-history h3 a,
 .new-transaction h3 a,
-.watchlist h3 a {
+.watchlist h3 a,
+.share-info h3 a {
     border-radius: 4px;
     color: #e8c303;
     background-color: black;
@@ -137,4 +70,17 @@ table tr td {
     position: relative;
     top: -10%;
     left: 50%;
+}
+
+.user-edit-form label, .user-edit-form input {
+    font-size: 16px;
+    margin: 3px;
+}
+
+.user-edit-form legend {
+    padding-top: 1em;
+}
+
+.user-edit-form input.disabled {
+    background-color: lightgray
 }
