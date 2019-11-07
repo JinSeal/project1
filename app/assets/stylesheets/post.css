@@ -48,8 +48,8 @@
 }
 
 .hidden-post-form {
-    position: absolute;
-    top: 30%;
+    position: fixed;
+    top: 10%;
     left: 40%;
     display: none;
     z-index: 9;
@@ -78,4 +78,10 @@
 .stats {
     width: 100%;
     display: inline-block;
+}
+
+.stats a {
+  background-color: white;
+  border: none;
+  color: black;
 }

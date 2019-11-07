@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     resources :watchlists, :except => [:show]
     get 'watchlists/:symbol' => "watchlists#index"
     resources :friendships, :except => [:new, :edit, :update]
-    resources :posts
+    resources :posts, :except => [:update]
+    post 'posts/:id' => 'posts#update'
 end

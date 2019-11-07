@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
 
     validates :email, :presence => true, :uniqueness => true
-    validates :account_no, :uniqueness => true
+    validates_uniqueness_of :account_no, :allow_nil => true, :allow_blank => true
 
     scope :sorted_by, ->(sort_option) {
       direction = /desc$/.match?(sort_option) ? "desc" : "asc"

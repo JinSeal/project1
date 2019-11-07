@@ -22,7 +22,7 @@
                     <th>Total Profit/Loss</th>
                     <th></th>
                 </tr>
-                <% unless @current_user.portfolios[0].transactions.blank? %>
+                <% unless @current_user.portfolios.blank? %>
                 <% portfolios_summary = get_portfolio_summary() %>
                 <% if portfolios_summary.present? %>
                 <% portfolios_summary.each  do |summary| %>

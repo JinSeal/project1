@@ -15,7 +15,8 @@
 .watchlist,
 .share-info,
 .posts-index,
-.post-block {
+.post-block,
+.friends-main {
     border: 1px solid lightgray;
     box-shadow: 0px 2px 3px lightgray;
     margin: 1vh 0;
@@ -38,7 +39,8 @@
 .transaction-history .wrap,
 .new-transaction .wrap,
 .watchlist .wrap,
-.share-info .wrap{
+.share-info .wrap,
+.friends-main .wrap{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,7 +51,8 @@
 .transaction-history h3 a,
 .new-transaction h3 a,
 .watchlist h3 a,
-.share-info h3 a {
+.share-info h3 a,
+.friends-main h3 a {
     border-radius: 4px;
     color: #e8c303;
     background-color: black;

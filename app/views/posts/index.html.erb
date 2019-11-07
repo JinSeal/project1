@@ -7,8 +7,7 @@
       <h3>Posts</h3>
 
       <%= form_for @filter_scope, :method => 'get' do |f|%>
-      <%= f.select :scope, @selections, :input_html => {:onchange => "javascript: $('select#post_scope').sumbit()"}%>
-      <%= f.submit "Search"%>
+      <%= f.select :scope, @selections, {},:onchange => 'this.form.submit();'%>
       <% end %>
 
       <% if @posts.present? %>
@@ -37,7 +36,7 @@
                 </a>
                 <div class="">
                   <% if post.user.id == @current_user.id %>
-                  <a href='posts/<%= post.id %>' class="post-edit-link"  value = "<%= post.id %>|<%= post.title %>|<%= post.content %>"><i class="glyphicon glyphicon-pencil"></i></a>
+                  <a href='posts/<%= post.id %>' class=""  ><i  class="post-edit-link glyphicon glyphicon-pencil" value = "<%= post.id %>|<%= post.title %>|<%= post.content %>"></i></a>
                   <a href='/posts/<%= post.id %>' data-confirm="Are you sure?" data-method="delete"><i class="glyphicon glyphicon-remove"></i></a>
                   <% else %>
 
@@ -57,11 +56,11 @@
       </div>
 
       <div class="hidden-post-form">
-        <%= simple_form_for @post, html: { class: "form"}, method: "post" do |f|%>
+        <%= simple_form_for @post, html: { class: "form hidden-post"}, method: "post" do |f|%>
         <legend id = "post-form-legend">New Post</legend>
         <%= f.input :title, as: :string, name: "title", placeholder: "*", required: true, input_html:{ id:"post-title-input"} %>
         <%= f.input :content, as: :text, name: "content", placeholder: "*", required: true, input_html:{ id:"post-content-textarea"} %>
-        <%= f.submit "Send"%>
+        <%= f.submit "Post"%>
         <a id="post-reset-link">Reset</a>
         <a id="post-back-link">Back</a>
         <% end %>

@@ -70,14 +70,17 @@ const main = function() {
         $('#post-title-input, #post-content-textarea').val("")
     })
 
-    const editPostLink = ($node)=> {
-        const info = $node.attr("value").split("|")
+    const editPostLink = (node)=> {
+        const info = $(node).attr("value").split("|")
         $('#post-title-input').val(info[1])
-        $('#post-content-textarea').val(info[2])}
+        $('#post-content-textarea').val(info[2])
+        $('.hidden-post').attr("action", "/posts/"+info[0])
+        }
 
     $('.post-edit-link').click((event)=> {
         event.preventDefault()
         editPostLink(event.target)
+
         $('#post-form-legend').text("Edit Post")
         $('#new-post').submit()
         $('.hidden-post-form').show()})
