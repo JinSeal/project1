@@ -1,4 +1,5 @@
 class WatchlistsController < ApplicationController
+    before_action :check_for_login
   def new
     @watchlist = Watchlist.new
     render :template => 'users/show'

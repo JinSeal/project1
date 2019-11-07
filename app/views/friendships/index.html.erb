@@ -1,0 +1,20 @@
+
+
+<%= render :partial => '/users/nav' %>
+
+<div class="user-content">
+    <%= render :partial => '/posts/aside' %>
+    <main class="user-main">
+        <div id="users">
+        <% for user in @users %>
+          <div class="user">
+            <div>
+              <strong><%=h user.username %></strong>
+              <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
+              <div class="clear"></div>
+            </div>
+          </div>
+        <% end %>
+        </div>
+    </main>
+</div>

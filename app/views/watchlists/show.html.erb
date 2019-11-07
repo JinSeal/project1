@@ -6,20 +6,35 @@
             <h3>
                 <div class="wrap">
                     <span>
-                        Share Information
+                        <%= @info.company_name %>
                     </span>
                     <%= link_to "Back", root_path %>
                 </div>
             </h3>
             <div class="stock-info">
                 <div class="stock-main-stats">
+                    <h4>Price: <%= number_to_currency @info.latest_price %></h4>
+                    <h4>Change: <%= number_to_currency @info.change %></h4>
+                    <h4>Change %: <%= number_to_percentage @info.change_percent * 100 %></h4>
                     <p>Symbol: <%= @info.symbol %></p>
                     <p>Company: <%= @info.company_name %></p>
-                    
+                    <% if @info.is_us_market_open %>
+                    <p>Market: Open</p>
+                    <p>High: <%= @info.high %></p>
+                    <p>Low: <%= @info.low %></p>
+                    <p>Open: <%= @info.open %></p>
+                    <p>Close: <%= @info.close raise%></p>
+                    <% else %>
+                    <p>Market: Close</p>
+                    <% end %>
                 </div>
                 <div class="stock-chart">
-                    Stock Chart Coming Oneday
+                    Stock Chart Coming Oneday.....(Maybe)
                 </div>
+            </div>
+            <div class="">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
         </main>
 </div>

@@ -154,3 +154,12 @@ aside a {
     align-items: center;
     justify-content: center;
 }
+
+.stock-info p {
+    line-height: normal;
+    font-size: 15px;
+
+}
+.stock-info h4 {
+    font-size: 20px;
+}

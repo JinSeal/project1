@@ -1,0 +1,68 @@
+<%= render :partial => '/users/nav' %>
+
+<div class="user-content">
+  <%= render :partial => '/posts/aside' %>
+  <main class="user-main">
+    <div class="posts-index">
+      <h3>Posts</h3>
+
+      <%= form_for @filter_scope, :method => 'get' do |f|%>
+      <%= f.select :scope, @selections, :input_html => {:onchange => "javascript: $('select#post_scope').sumbit()"}%>
+      <%= f.submit "Search"%>
+      <% end %>
+
+      <% if @posts.present? %>
+      <% @posts.each do |post| %>
+
+      <% if post.user == @current_user %>
+      <div class="post-block" style="background-color:antiquewhite;">
+        <% elsif @current_user.friend_ids.include?(post.user_id)%>
+        <div class="post-block" style="background-color:#e9f7f9;">
+          <% else %>
+          <div class="post-block">
+            <% end %>
+            <div class="post-wrap">
+              <h3 class='post-title'><%= post.title %></h3>
+              <p class="post-content"><%= post.content %></p>
+              <p class="post-user"><%= post.user.username %> updated at <%= post.updated_at.strftime("%l:%M %p, %A, %B %e, %Y") %></p>
+            </div>
+            <div class="post-control">
+              <div class="post-right">
+                <a href="#">
+                  <% if post.user.image.present? %>
+                  <img class ='thumb' src=<%= post.user.image %> alt=<%= post.user.username %>>
+                  <% else %>
+                  <img class ='thumb' src="/assets/profile-image.jpg" alt=<%= post.user.username %>>
+                  <% end %>
+                </a>
+                <div class="">
+                  <% if post.user.id == @current_user.id %>
+                  <a href='posts/<%= post.id %>' class="post-edit-link"  value = "<%= post.id %>|<%= post.title %>|<%= post.content %>"><i class="glyphicon glyphicon-pencil"></i></a>
+                  <a href='/posts/<%= post.id %>' data-confirm="Are you sure?" data-method="delete"><i class="glyphicon glyphicon-remove"></i></a>
+                  <% else %>
+
+                  <a ><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                  <a><i class="glyphicon glyphicon-thumbs-down"></i></a>
+
+
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <% end %>
+          <% end %>
+        </main>
+      </div>
+
+      <div class="hidden-post-form">
+        <%= simple_form_for @post, html: { class: "form"}, method: "post" do |f|%>
+        <legend id = "post-form-legend">New Post</legend>
+        <%= f.input :title, as: :string, name: "title", placeholder: "*", required: true, input_html:{ id:"post-title-input"} %>
+        <%= f.input :content, as: :text, name: "content", placeholder: "*", required: true, input_html:{ id:"post-content-textarea"} %>
+        <%= f.submit "Send"%>
+        <a id="post-reset-link">Reset</a>
+        <a id="post-back-link">Back</a>
+        <% end %>
+      </div>

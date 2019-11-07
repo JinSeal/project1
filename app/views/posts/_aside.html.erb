@@ -1,0 +1,37 @@
+
+<aside class="posts-aside">
+
+    <div class="user-profile">
+        <h3>Profile</h3>
+        <ul class="account-info">
+            <li class="username"><%= @current_user.username %></li>
+            <% if @current_user.image.present? %>
+            <a class=profile-photo href="#"><div>
+            <img src="<%= @current_user.image %>" alt=<%= @current_user.username %>></div></a>
+            <% else %>
+            <a class=profile-photo href="#"><img src="/assets/profile-image" alt=<%= @current_user.username %>></a>
+            <% end %>
+
+        </ul>
+    <% unless @current_user.admin %>
+        <div class="account-stats">
+            <div class="stats">
+                Following <br> <%= @current_user.friends.count %>
+            </div>
+            <div class="stats">
+                Followed <br> <%= @current_user.inverse_friends.count %>
+            </div>
+            <div class="stats">
+                Posts <br> <%= @current_user.posts.count ||=0%>
+            </div>
+        </div>
+
+        <div class="control">
+            <a id= "new-post-link">Post</a>
+            <a href="/users/<%= @current_user.id %>/edit">Edit Profile</a>
+            <%= link_to "Logout", login_path, :method => 'delete' %>
+        </div>
+        <% end %>
+
+    </div>
+</aside>

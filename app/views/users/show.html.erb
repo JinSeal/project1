@@ -84,7 +84,7 @@
                 <% portfolio_details.each do |detail| %>
                 <tr>
                     <td><%= detail[:folio_id] %></td>
-                    <td><%= detail[:symbol] %></td>
+                    <td><%= link_to detail[:symbol], "/watchlists/#{detail[:symbol]}" %></td>
                     <td><%= detail[:company_name] %></td>
                     <td><%= detail[:on_hand] %></td>
                     <td><%= number_to_currency detail[:avg_cost] %></td>
@@ -124,7 +124,7 @@
                 <% watchlists_info.each do |info| %>
                 <tr>
                     <td><%= info[:symbol] %></td>
-                    <td><%= info[:company] %></td>
+                    <td><%= link_to info[:symbol], "/watchlists/#{info[:symbol]}" %></td>
                     <td><%= number_to_currency info[:latest_price] %></td>
                     <td class='figure'><%= number_to_percentage info[:change_percent]*100 %></td>
                     <td><%= info[:volume] %></td>

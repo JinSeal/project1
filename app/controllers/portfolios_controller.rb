@@ -1,5 +1,5 @@
 class PortfoliosController < ApplicationController
-
+    
     def new
         @portfolio = Portfolio.new
         render :template => 'users/show'

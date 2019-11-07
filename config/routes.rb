@@ -13,9 +13,10 @@ Rails.application.routes.draw do
     resources :portfolios
 
     resources :transactions, :only => [ 'create', 'index']
-
     get 'transactions/:symbol' => "transactions#new", :as => 'newtransaction'
 
     resources :watchlists, :except => [:show]
-
+    get 'watchlists/:symbol' => "watchlists#index"
+    resources :friendships, :except => [:new, :edit, :update]
+    resources :posts
 end

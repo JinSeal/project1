@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
 
+    before_action :check_for_login
     def new
         @new_transaction = Transaction.new
         @new_transaction.symbol = new_params[:symbol].upcase

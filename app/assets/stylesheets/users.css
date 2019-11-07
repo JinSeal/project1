@@ -13,7 +13,9 @@
 .transaction-history,
 .new-transaction,
 .watchlist,
-.share-info {
+.share-info,
+.posts-index,
+.post-block {
     border: 1px solid lightgray;
     box-shadow: 0px 2px 3px lightgray;
     margin: 1vh 0;

@@ -51,12 +51,36 @@ const changeAction = () => {
     $('.search-form').attr('action', `/watchlists/${$('#nav-search-input').val()}`)
 }
 
+
+
 const main = function() {
-    $('#transaction_number, #transaction_trade_type').on("change", ()=>{calcTotal(); button()})
+    $('#transaction_number, #transaction_trade_type').on("change", (e)=>{ e.preventDefault(); calcTotal(); button()})
 
     $('#nav-search-input').on('change', changeAction())
 
-    $('#trade_link').click(()=>{$('#trade_form').toggle()})
+    $('#trade_link').click((e)=>{ e.preventDefault(); $('#trade_form').toggle()})
+
+    $('#new-post-link').click((e)=>{
+        e.preventDefault();
+        $('.hidden-post-form form').attr("action", "/posts")
+        $('.hidden-post-form').show()})
+    $('#post-back-link').click((e)=>{ e.preventDefault(); $('.hidden-post-form').hide()})
+    $('#post-reset-link').click((e)=>{
+        e.preventDefault();
+        $('#post-title-input, #post-content-textarea').val("")
+    })
+
+    const editPostLink = ($node)=> {
+        const info = $node.attr("value").split("|")
+        $('#post-title-input').val(info[1])
+        $('#post-content-textarea').val(info[2])}
+
+    $('.post-edit-link').click((event)=> {
+        event.preventDefault()
+        editPostLink(event.target)
+        $('#post-form-legend').text("Edit Post")
+        $('#new-post').submit()
+        $('.hidden-post-form').show()})
 
 
     figureColor()
