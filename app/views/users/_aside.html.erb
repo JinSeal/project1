@@ -7,16 +7,16 @@
             <li>Username: <%= @current_user.username %></li>
             <li>Account Name: <%= @current_user.full_name %></li>
             <li>Account No:<%= @current_user.account_no %></li>
-            <li>Account Created:<br><%= @current_user.created_at %></li>
-            <li>Last Update:<br><%= @current_user.updated_at %></li>
+            <li>Account Created:<br><%= @current_user.created_at.strftime("%A, %B %e, %Y") %></li>
+            <li>Last Update:<br><%= @current_user.updated_at.strftime("%A, %B %e, %Y") %></li>
         </ul>
 <% unless @current_user.admin %>
         <ul class="account-info">
             <li>Strategy: <%= @current_user.strategy %></li>
             <li>Account Balance: <%= number_to_currency @current_user.balance %></li>
             <% if investment_summary.present? %>
-            <li>Total Investment: <%= number_to_currency investment_summary()[:total_investment] %></li>
-            <li>Total Profit/Loss: <%= number_to_currency investment_summary()[:total_profit] %></li>
+            <li>Total Investment:<%= number_to_currency investment_summary()[:total_investment] %>
+            <li>Total Profit/Loss:<%= colorSpan(investment_summary()[:total_profit]) %></li>
             <% end %>
         </ul>
 

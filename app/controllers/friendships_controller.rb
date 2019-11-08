@@ -1,6 +1,10 @@
 class FriendshipsController < ApplicationController
     before_action :check_for_login
-  def show
+  def following
+    @user = @current_user
+  end
+
+  def followed
     @user = @current_user
   end
 
@@ -11,10 +15,10 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = @current_user.friendships.new(friendship_params)
     if @friendship.save
-      flash[:notice] = "Added friend."
+      flash[:notice] = "Friend Added"
       redirect_to friendships_path
     else
-      flash[:error] = "Unable to add friend."
+      flash[:error] = "Friended Already."
       redirect_to friendships_path
     end
   end
@@ -23,7 +27,7 @@ class FriendshipsController < ApplicationController
     friendship = @current_user.friendships.find(params[:id])
     friendship.destroy
     flash[:notice] = "Removed friendship."
-    redirect_to friendship_path
+    redirect_to following_path
   end
 
     private

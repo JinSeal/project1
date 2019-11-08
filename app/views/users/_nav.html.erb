@@ -7,6 +7,7 @@
         <% end %>
     </div>
     <div class="navbar-end">
+        <% unless @current_user.admin %>
         <a class="navbar-item" href="/"><div class="wrap">
             <i class="glyphicon glyphicon-piggy-bank"></i>
             InvestorHub
@@ -15,7 +16,12 @@
             <i class='glyphicon glyphicon-globe'></i>
             Community
         </div></a>
-
+        <% else %>
+        <a class="navbar-item" href="/"><div class="wrap">
+            <i class="glyphicon glyphicon-tasks"></i>
+            Administration
+        </div></a>
+        <% end %>
         <div class="navbar-item">
             <form class="search-form" action="" method="get">
                 <div class="wrap">

@@ -28,8 +28,7 @@ class TransactionsController < ApplicationController
         end
 
         def index
-            @all_transactions = @current_user.transactions.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 12, :page => params[:page])
-            @all_transactions = @current_user.transactions.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 12, :page => params[:page]) if params[:search].present?
+            @all_transactions = @current_user.transactions.search(params[:search_transaction]).order(sort_column + " " + sort_direction).paginate(:per_page => 12, :page => params[:page])
         end
 
         private

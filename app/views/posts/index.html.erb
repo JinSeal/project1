@@ -7,6 +7,7 @@
       <h3>Posts</h3>
 
       <%= form_for @filter_scope, :method => 'get' do |f|%>
+      <%= f.label 'Filter:  ' %>
       <%= f.select :scope, @selections, {},:onchange => 'this.form.submit();'%>
       <% end %>
 
@@ -23,7 +24,7 @@
             <div class="post-wrap">
               <h3 class='post-title'><%= post.title %></h3>
               <p class="post-content"><%= post.content %></p>
-              <p class="post-user"><%= post.user.username %> updated at <%= post.updated_at.strftime("%l:%M %p, %A, %B %e, %Y") %></p>
+              <p class="post-user"><strong style="color:#347bb7"><%= post.user.username %> _</strong> updated at <%= post.updated_at.strftime("%l:%M %p, %A, %B %e, %Y") %></p>
             </div>
             <div class="post-control">
               <div class="post-right">
@@ -35,15 +36,16 @@
                   <% end %>
                 </a>
                 <div class="">
+                  <% unless @current_user.admin%>
                   <% if post.user.id == @current_user.id %>
-                  <a href='posts/<%= post.id %>' class=""  ><i  class="post-edit-link glyphicon glyphicon-pencil" value = "<%= post.id %>|<%= post.title %>|<%= post.content %>"></i></a>
+                  <a href=<%= post_path(post.id) %> ><i  class="post-edit-link glyphicon glyphicon-pencil" value = "<%= post.id %>|<%= post.title %>|<%= post.content %>|<%= post.scope %>"></i></a>
                   <a href='/posts/<%= post.id %>' data-confirm="Are you sure?" data-method="delete"><i class="glyphicon glyphicon-remove"></i></a>
                   <% else %>
-
                   <a ><i class="glyphicon glyphicon-thumbs-up"></i></a>
                   <a><i class="glyphicon glyphicon-thumbs-down"></i></a>
-
-
+                  <% end %>
+                  <% else %>
+                  <a href='/posts/<%= post.id %>' data-confirm="Are you sure?" data-method="delete"><i class="glyphicon glyphicon-remove"></i></a>
                   <% end %>
                 </div>
               </div>
@@ -60,6 +62,7 @@
         <legend id = "post-form-legend">New Post</legend>
         <%= f.input :title, as: :string, name: "title", placeholder: "*", required: true, input_html:{ id:"post-title-input"} %>
         <%= f.input :content, as: :text, name: "content", placeholder: "*", required: true, input_html:{ id:"post-content-textarea"} %>
+        <%= f.input :scope, :collection => @selections, input_html:{ id:"post-scope-select"}, required: true%>
         <%= f.submit "Post"%>
         <a id="post-reset-link">Reset</a>
         <a id="post-back-link">Back</a>

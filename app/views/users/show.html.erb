@@ -2,150 +2,152 @@
 <%= render :partial => '/users/nav' %>
 
 <div class="user-content">
-    <%= render :partial => '/users/aside' %>
-    <main class="user-main">
-        <div class="portfolio-summary">
-            <h3>
-                <div class="wrap">
-                    <span>
-                        Portfolio Summary
-                    </span>
-                    <%= link_to "New Portfolio", new_portfolio_path %>
-                </div>
-            </h3>
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Folio Name</th>
-                    <th>Investment</th>
-                    <th>Today's Change</th>
-                    <th>Total Profit/Loss</th>
-                    <th></th>
-                </tr>
-                <% unless @current_user.portfolios.blank? %>
-                <% portfolios_summary = get_portfolio_summary() %>
-                <% if portfolios_summary.present? %>
-                <% portfolios_summary.each  do |summary| %>
-                <tr>
-                    <td><%= summary[:id] %></td>
-                    <td><%= summary[:name] %></td>
-                    <td><%= number_to_currency summary[:investment] %></td>
-                    <td class='figure'><%= number_to_currency summary[:today_change] %></td>
-                    <td class='figure'><%= number_to_currency summary[:total_profit] %></td>
-                    <td><a href="/portfolios/<%= summary[:id] %>/edit">Edit</a></td>
-                    <% if check_empty_portfolio(summary[:id]) %>
-                    <td><a href="/portfolios/<%= summary[:id]%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
-                    <% end %>
-                </tr>
-                <% end %>
-                <% else %>
-                <% @portfolios.each do |folio| %>
-                <tr>
-                    <td><%= folio.id %></td>
-                    <td><%= folio.name %></td>
-                    <td></td>
-                    <td class='figure'></td>
-                    <td class='figure'></td>
-                    <td><a href="/portfolios/<%= folio.id %>/edit">Edit</a></td>
-                    <% if check_empty_portfolio(folio.id) %>
-                    <td><a href="/portfolios/<%= folio.id%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
-                    <% end %>
-                </tr>
-
-                <% end %>
-                <% end %>
-                <% end %>
-            </table>
+  <%= render :partial => '/users/aside' %>
+  <main class="user-main">
+    <div class="portfolio-summary">
+      <h3>
+        <div class="wrap">
+          <span>
+            Portfolio Summary
+          </span>
+          <%= link_to "New Portfolio", new_portfolio_path %>
         </div>
-
-        <% if @current_user.portfolios.present? %>
-        <div class="portfolio-detail">
-            <h3>
-                <div class="wrap">
-                    <span>Portfolio details</span>
-                    <% if @current_user.transactions.present? %>
-                    <%= link_to "History", transactions_path, :method => 'get' %>
-                    <% end %>
-                </div>
-            </h3>
-            <% if @current_user.transactions.present? %>
-            <table>
-                <tr>
-                    <td title="Portfolio id">Folio</td>
-                    <th>Symbol</th>
-                    <th>Company Name</th>
-                    <th>No.</th>
-                    <th>Avg Purchase</th>
-                    <th>Latest Price</th>
-                    <th>Change %</th>
-                    <th>Change</th>
-                </tr>
-                <% portfolio_details = get_portfolio_details() %>
-                <% portfolio_details.each do |detail| %>
-                <tr>
-                    <td><%= detail[:folio_id] %></td>
-                    <td><%= link_to detail[:symbol], "/watchlists/#{detail[:symbol]}" %></td>
-                    <td><%= detail[:company_name] %></td>
-                    <td><%= detail[:on_hand] %></td>
-                    <td><%= number_to_currency detail[:avg_cost] %></td>
-                    <td><%= number_to_currency detail[:latest_price] %></td>
-                    <td class='figure'><%= number_to_percentage detail[:change_percent]*100 %></td>
-                    <td class='figure'><%= number_to_currency detail[:profit]%></td>
-                </tr>
-                <% end %>
-            </table>
-            <% end %>
-        </div>
+      </h3>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Folio Name</th>
+          <th>Investment</th>
+          <th>Today's Change</th>
+          <th>Total Profit/Loss</th>
+          <th></th>
+        </tr>
+        <% unless @current_user.portfolios.blank? %>
+        <% portfolios_summary = get_portfolio_summary() %>
+        <% if portfolios_summary.present? %>
+        <% portfolios_summary.each  do |summary| %>
+        <tr>
+          <td><%= summary[:id] %></td>
+          <td><%= summary[:name] %></td>
+          <td><%= number_to_currency summary[:investment] %></td>
+          <%= colorCell(summary[:today_change], 'currency') %>
+          <%= colorCell(summary[:total_profit], 'currency') %>
+          <td><a href="/portfolios/<%= summary[:id] %>/edit">Edit</a></td>
+          <% if check_empty_portfolio(summary[:id]) %>
+          <td><a href="/portfolios/<%= summary[:id]%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
+          <% end %>
+        </tr>
         <% end %>
+        <% else %>
+        <% @portfolios.each do |folio| %>
+        <tr>
+          <td><%= folio.id %></td>
+          <td><%= folio.name %></td>
+          <td></td>
+          <td class='figure'></td>
+          <td class='figure'></td>
+          <td><a href="/portfolios/<%= folio.id %>/edit">Edit</a></td>
+          <% if check_empty_portfolio(folio.id) %>
+          <td><a href="/portfolios/<%= folio.id%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
+          <% end %>
+        </tr>
 
-        <div class="watchlist">
-            <h3>
-                <div class="wrap">
-                    <span>
-                        Watchlist
-                    </span>
-                    <%= link_to "New Item", new_watchlist_path %>
-                </div>
-            </h3>
-            <% if @current_user.watchlists.present? %>
-            <table>
-                <tr>
-                    <th>Symbol</th>
-                    <th>Name</th>
-                    <th>Latest Price</th>
-                    <th>Change %</th>
-                    <th>Volume</th>
-                    <th>Prev Close</th>
-                    <th>Open</th>
-                    <th> </th>
-                </tr>
-
-                <% watchlists_info= get_watchlist_info() %>
-                <% watchlists_info.each do |info| %>
-                <tr>
-                    <td><%= info[:symbol] %></td>
-                    <td><%= link_to info[:symbol], "/watchlists/#{info[:symbol]}" %></td>
-                    <td><%= number_to_currency info[:latest_price] %></td>
-                    <td class='figure'><%= number_to_percentage info[:change_percent]*100 %></td>
-                    <td><%= info[:volume] %></td>
-                    <td><%= number_to_currency info[:previous_close] %></td>
-                    <td><%= number_to_currency info[:open] %></td>
-                    <td><a href="/watchlists/<%= info[:id]%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
-                </tr>
-                <% end %>
-            </table>
-            <% end %>
-        </div>
-
-        <% if params[:controller] == "portfolios" %>
-        <%= render :partial => 'users/portfolio_form' %>
         <% end %>
-
-        <% if params[:controller] == "watchlists" %>
-        <%= render :partial => 'users/watchlist_form' %>
         <% end %>
-        <div class="message box">
-            <%= @msg %>
+        <% end %>
+      </table>
+    </div>
+
+    <% if @current_user.portfolios.present? %>
+    <div class="portfolio-detail">
+      <h3>
+        <div class="wrap">
+          <span>Portfolio details</span>
+          <% if @current_user.transactions.present? %>
+          <%= link_to "History", transactions_path, :method => 'get' %>
+          <% end %>
         </div>
-    </main>
+      </h3>
+      <% if @current_user.transactions.present? %>
+      <table>
+        <tr>
+          <td title="Portfolio id">Folio</td>
+          <th>Symbol</th>
+          <th>Company Name</th>
+          <th>No.</th>
+          <th>Avg Purchase</th>
+          <th>Latest Price</th>
+          <th>Change %</th>
+          <th>Change</th>
+        </tr>
+        <% portfolio_details = get_portfolio_details() %>
+        <% portfolio_details.each do |detail| %>
+<% unless detail[:on_hand] == 0 %>
+        <tr>
+          <td><%= detail[:folio_id] %></td>
+          <td><%= link_to detail[:symbol], "/watchlists/#{detail[:symbol]}" %></td>
+          <td><%= detail[:company_name] %></td>
+          <td><%= detail[:on_hand] %></td>
+          <td><%= number_to_currency detail[:avg_cost] %></td>
+          <td><%= number_to_currency detail[:latest_price] %></td>
+          <%= colorCell(detail[:change_percent], 'percent') %>
+          <%= colorCell(detail[:profit], 'currency') %>
+        </tr>
+        <% end %>
+        <% end %>
+      </table>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div class="watchlist">
+      <h3>
+        <div class="wrap">
+          <span>
+            Watchlist
+          </span>
+          <%= link_to "New Item", new_watchlist_path %>
+        </div>
+      </h3>
+      <% if @current_user.watchlists.present? %>
+      <table>
+        <tr>
+          <th>Symbol</th>
+          <th>Name</th>
+          <th>Latest Price</th>
+          <th>Change %</th>
+          <th>Change</th>
+          <th>Prev Close</th>
+          <th>Open</th>
+          <th> </th>
+        </tr>
+
+        <% watchlists_info= get_watchlist_info() %>
+        <% watchlists_info.each do |info| %>
+        <tr>
+          <td><%= info[:symbol] %></td>
+          <td><%= link_to info[:symbol], "/watchlists/#{info[:symbol]}" %></td>
+          <td><%= number_to_currency info[:latest_price] %></td>
+          <%= colorCell(info[:change_percent], 'percent') %>
+          <%= colorCell(info[:change], 'currency') %>
+          <td><%= number_to_currency info[:previous_close] %></td>
+          <td><%= number_to_currency info[:open] %></td>
+          <td><a href="/watchlists/<%= info[:id]%>", data-confirm="Are you sure?" data-method="delete">Delete</a></td>
+        </tr>
+        <% end %>
+      </table>
+      <% end %>
+    </div>
+
+    <% if params[:controller] == "portfolios" %>
+    <%= render :partial => 'users/portfolio_form' %>
+    <% end %>
+
+    <% if params[:controller] == "watchlists" %>
+    <%= render :partial => 'users/watchlist_form' %>
+    <% end %>
+    <div class="message box">
+      <%= @msg %>
+    </div>
+  </main>
 </div>

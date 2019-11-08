@@ -36,16 +36,6 @@ const button = () => {
     }
 }
 
-const figureColor = () => {
-    $('.figure').each(()=>{
-        let text = $(this).text()
-        if (Number(text) >= 0) {
-            $(this).css('color', 'green')
-        } else {
-            $(this).css('color', 'red')
-        }
-    })
-}
 
 const changeAction = () => {
     $('.search-form').attr('action', `/watchlists/${$('#nav-search-input').val()}`)
@@ -62,6 +52,7 @@ const main = function() {
 
     $('#new-post-link').click((e)=>{
         e.preventDefault();
+        $('#post-title-input, #post-content-textarea').val("")
         $('.hidden-post-form form').attr("action", "/posts")
         $('.hidden-post-form').show()})
     $('#post-back-link').click((e)=>{ e.preventDefault(); $('.hidden-post-form').hide()})
@@ -74,6 +65,7 @@ const main = function() {
         const info = $(node).attr("value").split("|")
         $('#post-title-input').val(info[1])
         $('#post-content-textarea').val(info[2])
+        $('#post-scope-select').val(info[3]).change()
         $('.hidden-post').attr("action", "/posts/"+info[0])
         }
 
@@ -85,8 +77,6 @@ const main = function() {
         $('#new-post').submit()
         $('.hidden-post-form').show()})
 
-
-    figureColor()
 }
 
 

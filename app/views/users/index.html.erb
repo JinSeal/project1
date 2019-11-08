@@ -3,7 +3,8 @@
 <div class="admin-content">
     <div class="admin-control">
         <%= link_to "Admin Users", login_path, :method => 'get' %>
-        <%= link_to "Admin Funds", login_path, :method => 'get' %>
+        <%= link_to "Admin Funds" %>
+        <%= link_to "Admin Posts", posts_path, :method => 'get' %>
         <a href="/users/<%= @current_user.id %>/edit">Edit Profile</a>
         <%= link_to "Logout", login_path, :method => 'delete' %>
     </div>

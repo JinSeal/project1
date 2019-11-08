@@ -16,7 +16,8 @@
 
             <%= form_tag transactions_path, :method => 'get', :id => "transactions_search", :class => 'search-form' do %>
             <div class="wrap">
-                <%= text_field_tag :search, params[:search], placeholder: "Search by symbol or trade", :class => 'test' %>
+                <%= text_field_tag :search_transaction, params[:search_transaction], placeholder: "Search by symbol or trade", :class => 'test' ,  :name=>'search_transaction' %>
+<!-- :onchange => 'this.form.submit();', -->
             </div>
             <div class="wrap">
                 <button><span><i class='fa fa-search'></i></span><span>Search</span></button>

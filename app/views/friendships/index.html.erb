@@ -14,15 +14,32 @@
           <%= link_to "Back", posts_path %>
         </div>
       </h3>
-      <div id="users">
+      <div class="all-users">
         <% for user in @users %>
-        <div class="user">
-            <%= user.username %>
-            <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
-            <div class="clear"></div>
+        <div class="friend-user">
+          <h4><%= user.username %></h4>
+          <div class="">
+            <% if user.image.present? %>
+            <img class ='thumb' src=<%= user.image %> alt=<%= user.username %>>
+            <% else %>
+            <img class ='thumb' src="/assets/profile-image.jpg" alt=<%= user.username %>>
+            <% end %>
+          </div>
+          <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
+          <div class="clear"></div>
         </div>
         <% end %>
       </div>
     </div>
   </main>
 </div>
+<% if flash[:notice].present? %>
+<div class="friending-notice">
+  <p><%= flash[:notice] %></p>
+</div>
+<% end %>
+<% if flash[:error].present? %>
+<div class="friending-notice">
+  <p><%= flash[:error] %></p>
+</div>
+<% end %>

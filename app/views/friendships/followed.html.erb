@@ -1,0 +1,24 @@
+<%= render :partial => '/users/nav' %>
+
+<div class="user-content">
+  <%= render :partial => '/posts/aside' %>
+  <main class="user-main">
+    <div class="friends-main">
+      <h3>
+        <div class="wrap">
+          <span>
+            Followed
+          </span>
+          <%= link_to "Back", posts_path %>
+        </div>
+      </h3>
+      <div class="">
+        <% for user in @user.inverse_friends %>
+          <li><%= user.username %></li>
+        <% end %>
+      </div>
+
+        <p><%= link_to "Find New Connect", friendships_path %></p>
+
+    </main>
+</div>

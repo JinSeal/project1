@@ -16,10 +16,10 @@
     <% unless @current_user.admin %>
         <div class="account-stats">
             <div class="stats">
-                <a href=<%= friendship_path(@current_user) %>>Following <br> <%= @current_user.friends.count %></a>
+                <a href=<%= following_path(@current_user) %>>Following <br> <%= @current_user.friends.count %></a>
             </div>
             <div class="stats">
-              <a href=<%= friendship_path(@current_user) %>>Followed <br> <%= @current_user.inverse_friends.count %></a>
+              <a href=<%= followed_path(@current_user) %>>Followed <br> <%= @current_user.inverse_friends.count %></a>
             </div>
             <div class="stats">
                 <a href="/posts?post%5Bscope%5D=Only+Me">Posts <br> <%= @current_user.posts.count ||=0%></a>

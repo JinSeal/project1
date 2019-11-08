@@ -85,3 +85,30 @@
   border: none;
   color: black;
 }
+
+.all-users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.friend-user {
+  width: 24%;
+  box-shadow: 0 0 2px lightgray;
+  margin: 3px 1px;
+}
+
+.friend-user img {
+  width: 95%;
+}
+
+.friending-notice {
+  position: absolute;
+  top: 30%;
+  left: 55%;
+  font-size: 30px;
+  background-color: #e8c302;
+  padding: 1vh 3vh;
+  font-style: italic;
+}

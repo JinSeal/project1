@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
   private
   def posts_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :scope)
   end
 
   def filter_scope
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     if params[:post].present?
       @posts = @posts.where(:user_id => @current_user.friendships) if params[:post][:scope] == 'Friends'
 
-      @posts = @posts.where(user_id: @current_user[:id]) if params[:post][:scope] =='Only Me'
+      @posts = Post.where(user_id: @current_user[:id]) if params[:post][:scope] =='Only Me'
 
       @filter_scope[:scope] = params[:post][:scope] if params[:post][:scope].present?
     end
@@ -59,5 +59,6 @@ class PostsController < ApplicationController
       @posts = first.or(second)
     end
     @posts = @posts.order('created_at DESC')
+    @post = Post.new
   end
 end

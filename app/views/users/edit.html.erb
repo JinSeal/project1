@@ -10,7 +10,11 @@
             <legend><span class="number">1</span> Personal Details</legend>
 
             <%= f.input :email, disabled: true, as: :string%>
+            <% unless @current_user.admin %>
             <%= f.input :account_no, disabled: true, as: :string%>
+            <% else %>
+            <%= f.input :account_no, as: :string%>
+            <% end %>
             <%= f.input :username, placeholder:"Your user name *", as: :string, required: true %>
             <%= f.input :full_name, placeholder:"Your full name *", as: :string, required: true%>
             <%= f.input :dob, start_year: Date.today.year - 100, end_year: Date.today.year - 17%>
