@@ -20,14 +20,14 @@ class WatchlistsController < ApplicationController
       redirect_to root_path
   end
 
-    def index
-        @info = StockQuote::Stock.quote params[:symbol]
-        render :show
-    end
+  def index
+      @info = StockQuote::Stock.quote params[:symbol]
+      render :show
+  end
 
-    private
-    def watchlist_params
-        params.require(:watchlist).permit(:symbol)
-    end
+  private
+  def watchlist_params
+      params.require(:watchlist).permit(:symbol)
+  end
 
 end

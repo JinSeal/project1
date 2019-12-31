@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-    before_action :check_for_login
+  before_action :check_for_login
   def following
     @user = @current_user
   end
@@ -30,8 +30,8 @@ class FriendshipsController < ApplicationController
     redirect_to following_path
   end
 
-    private
-    def friendship_params
-        params.permit(:friend_id)
-    end
+  private
+  def friendship_params
+      params.permit(:friend_id)
+  end
 end

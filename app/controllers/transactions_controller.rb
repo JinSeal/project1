@@ -15,29 +15,41 @@ class TransactionsController < ApplicationController
 
     def create
         transaction = Transaction.create create_params
-        transaction.update(:on_hand => calc_share_num(create_params[:portfolio_id], create_params[:symbol], create_params[:number], create_params[:price], create_params[:trade_type]), :avg_cost => calc_avg_price(create_params[:portfolio_id], create_params[:symbol],
-            create_params[:price], create_params[:number],  create_params[:trade_type]), :settlment_date => Date.today.strftime("%Y-%m-%d"))
-            total = create_params[:number].to_i * create_params[:price].to_f
-            balance = @current_user.balance
-            if create_params[:trade_type] == "Buy"
-                @current_user.update(:balance => (balance - total))
-            else
-                @current_user.update(:balance => (balance + total))
-            end
-            redirect_to transactions_path
+        transaction.update(
+            :on_hand => calc_share_num(
+                create_params[:portfolio_id], 
+                create_params[:symbol], 
+                create_params[:number], 
+                create_params[:price], 
+                create_params[:trade_type]), 
+            :avg_cost => calc_avg_price(
+                create_params[:portfolio_id], 
+                create_params[:symbol],
+                create_params[:price], 
+                create_params[:number],  
+                create_params[:trade_type]), 
+                :settlment_date => Date.today.strftime("%Y-%m-%d"))
+        total = create_params[:number].to_i * create_params[:price].to_f
+        balance = @current_user.balance
+        if create_params[:trade_type] == "Buy"
+            @current_user.update(:balance => (balance - total))
+        else
+            @current_user.update(:balance => (balance + total))
         end
-
-        def index
-            @all_transactions = @current_user.transactions.search(params[:search_transaction]).order(sort_column + " " + sort_direction).paginate(:per_page => 12, :page => params[:page])
-        end
-
-        private
-        def new_params
-            params.require(:transaction).permit(:symbol, :portfolio_id)
-        end
-
-        def create_params
-            params.require(:transaction).permit(:symbol, :trade_type, :portfolio_id, :number, :price)
-        end
-
+        redirect_to transactions_path
     end
+
+    def index
+        @all_transactions = @current_user.transactions.search(params[:search_transaction]).order(sort_column + " " + sort_direction).paginate(:per_page => 12, :page => params[:page])
+    end
+
+    private
+    def new_params
+        params.require(:transaction).permit(:symbol, :portfolio_id)
+    end
+
+    def create_params
+        params.require(:transaction).permit(:symbol, :trade_type, :portfolio_id, :number, :price)
+    end
+
+end

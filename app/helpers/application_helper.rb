@@ -79,7 +79,6 @@ module ApplicationHelper
           portfolio_details.append( portfolio_detail)
 
         end
-
       end
     end
     portfolio_details
