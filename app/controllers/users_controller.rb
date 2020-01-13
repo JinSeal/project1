@@ -40,22 +40,24 @@ class UsersController < ApplicationController
             select_options: {
                 :sorted_by => User.options_for_sorted_by,
                 :with_strategy => ['Dividend Income', 'Balanced', 'Capital Growth']
-            })) || return @users = @filterrific.find.page(params[:page])
+            },
+            )) || return
+            @users = @filterrific.find.page(params[:page])
 
-        respond_to do |format|
-            format.html
-            format.js
+            respond_to do |format|
+                format.html
+                format.js
+            end
         end
+
+        private
+
+        def user_params
+            params.require(:user).permit(:email, :password, :password_confirmation)
+        end
+
+        def profile_params
+            params.require(:user).permit(:username, :full_name, :dob, :address, :mobile, :image, :subscription, :strategy, :account_no)
+        end
+
     end
-
-    private
-
-    def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
-    end
-
-    def profile_params
-        params.require(:user).permit(:username, :full_name, :dob, :address, :mobile, :image, :subscription, :strategy, :account_no)
-    end
-
-end
